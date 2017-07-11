@@ -38,30 +38,37 @@ node {
     docker.withRegistry(DOCKER_REGISTRY_URL, DOCKER_REGISTRY_CREDENTIALS) {
     
       // Build the common container
-      imageCommon = docker.build("${MAINTAINER_NAME}/test-base:${BUILD_TAG}", 'docker/osh-test-base')
-      imageCommon.push(BUILD_TAG)
-
+//      imageCommon = docker.build("${MAINTAINER_NAME}/test-base:${BUILD_TAG}", 'docker/osh-test-base')
+//      imageCommon.push(BUILD_TAG)
+//        oc start-build --from-file=docker/osh-test-base
+  stage('Create Docker Image') {
+    dir('docker/osh-test-base') {
+      docker.build("osh-test/test-base:${BUILD_TAG}")
+    }
+}        
+        
+        
       // Build the cache container
-      imageCache = docker.build("${MAINTAINER_NAME}/test-cache:${BUILD_TAG}", 'docker/osh-test-cache')
-      imageCache.push(BUILD_TAG)
+//      imageCache = docker.build("${MAINTAINER_NAME}/test-cache:${BUILD_TAG}", 'docker/osh-test-cache')
+//      imageCache.push(BUILD_TAG)
       
       // Build the Web frontoffice container
-      imageWebFront = docker.build("${MAINTAINER_NAME}/test-web:${BUILD_TAG}", 'docker/osh-test-web')
-      imageWebFront.push(BUILD_TAG)
+//      imageWebFront = docker.build("${MAINTAINER_NAME}/test-web:${BUILD_TAG}", 'docker/osh-test-web')
+//      imageWebFront.push(BUILD_TAG)
       
     }
   }
 
   // TODO check source code is correctly copied in the container at the good location
 
-  stage ('Build Web FRONT image') {
-    containerWebFront = imageWebFront.withRun[] {
+//  stage ('Build Web FRONT image') {
+//    containerWebFront = imageWebFront.withRun[] {
       // retrieve container ID
-      containerWebFrontId = containerWebFront.id
+//      containerWebFrontId = containerWebFront.id
       // copy front code in the image
-      sh "docker cp webfiles/* ${containerWebFrontId}:/var/www/testsite"
+//      sh "docker cp webfiles/* ${containerWebFrontId}:/var/www/testsite"
       // commit change to create a new web-front image
-      sh "docker commit ${containerWebFrontId} ${MAINTAINER_NAME}/test-web:${BUILD_TAG}"
+//      sh "docker commit ${containerWebFrontId} ${MAINTAINER_NAME}/test-web:${BUILD_TAG}"
     }
   }
  
