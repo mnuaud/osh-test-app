@@ -19,12 +19,12 @@ ENV LANG C.UTF-8
 
 #================================================
 # Copy conf files to etc
-COPY etc/ /etc/
+#COPY etc/ /etc/
 
 #================================================
 # Link the timezone to Paris
-RUN rm /etc/localtime
-RUN ln -s /usr/share/zoneinfo/Europe/Paris  /etc/localtime
+#RUN rm /etc/localtime
+#RUN ln -s /usr/share/zoneinfo/Europe/Paris  /etc/localtime
 
 #================================================
 # Update the package repository
