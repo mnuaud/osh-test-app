@@ -26,56 +26,26 @@ node {
   }
 
   // Docker Build golden images
-  stage ('Build & Push Docker Golden Images'){
-
-    // Removing old untagged images
-//    try{
-//      sh 'docker rmi $(docker images -q --filter "dangling=true")'
-//    } catch (Exception e){
-//      // Nothing
-//    }
-
-    docker.withRegistry(DOCKER_REGISTRY_URL, DOCKER_REGISTRY_CREDENTIALS) {
-    
+  stage ('Build & Push Docker Golden Images'){    
       // Build the common container
-//      imageCommon = docker.build("${MAINTAINER_NAME}/test-base:${BUILD_TAG}", 'docker/osh-test-base')
-//      imageCommon.push(BUILD_TAG)
 //        oc start-build --from-file=docker/osh-test-base
   stage('Create Docker Image') {
     dir('docker/osh-test-base') {
       docker.build("osh-test/test-base:${BUILD_TAG}")
     }
-}        
-        
-        
+}             
+//TODO        
       // Build the cache container
-//      imageCache = docker.build("${MAINTAINER_NAME}/test-cache:${BUILD_TAG}", 'docker/osh-test-cache')
-//      imageCache.push(BUILD_TAG)
-      
+//TODO            
       // Build the Web frontoffice container
-//      imageWebFront = docker.build("${MAINTAINER_NAME}/test-web:${BUILD_TAG}", 'docker/osh-test-web')
-//      imageWebFront.push(BUILD_TAG)
-      
-    }
+
   }
 
-  // TODO check source code is correctly copied in the container at the good location
-
+// TODO check source code is correctly copied in the container at the good location
 //  stage ('Build Web FRONT image') {
-//    containerWebFront = imageWebFront.withRun[] {
-      // retrieve container ID
-//      containerWebFrontId = containerWebFront.id
-      // copy front code in the image
-//      sh "docker cp webfiles/* ${containerWebFrontId}:/var/www/testsite"
-      // commit change to create a new web-front image
-//      sh "docker commit ${containerWebFrontId} ${MAINTAINER_NAME}/test-web:${BUILD_TAG}"
-    }
-  }
+//  }
  
+//TODO 
 //  stage('Push Web back & front images to Registry'){
-//    docker.withRegistry(DOCKER_REGISTRY_URL, DOCKER_REGISTRY_CREDENTIALS) {
-//      imageWebFront.push(BUILD_TAG)
-//      imageWebBack.push(BUILD_TAG)
-//    }
 //  }
 }
