@@ -1,7 +1,7 @@
 #
 # Test Cache Dockerfile
 #
-FROM test/test-base:latest
+FROM osh-test/osh-test-base:latest
 
 #================================================   
 LABEL version="1.0"

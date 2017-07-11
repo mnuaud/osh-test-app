@@ -12,7 +12,7 @@ node {
 
   // Registry
   //TODO: modify registry adress, such as test.test.io:8080
-  final DOCKER_REGISTRY = 'registry_adress_to_be_modified'
+  final DOCKER_REGISTRY = 'docker-registry-default.pocapps.poc.s2-eu.capgemini.com:5000'
   final DOCKER_REGISTRY_URL = 'https://'+DOCKER_REGISTRY
   final DOCKER_REGISTRY_CREDENTIALS = 'docker_registry_cred'
 
@@ -23,7 +23,7 @@ node {
 
     // checkout the branch of the repository
     // TODO : once dockerfile setup is good and the PR is merged on github, change repository accordingly to the environment (prod->master; preprod->preprod; qa->integ;)
-    git branch: 'master', credentialsId: 'github_ssh', url: 'git@github.com:mnuaud/test.git'
+    git branch: 'master', credentialsId: 'github_ssh', url: 'https://github.com/mnuaud/osh-test-app.git'
   }
 
   // Docker Build golden images
@@ -39,15 +39,15 @@ node {
     docker.withRegistry(DOCKER_REGISTRY_URL, DOCKER_REGISTRY_CREDENTIALS) {
     
       // Build the common container
-      imageCommon = docker.build("${MAINTAINER_NAME}/test-base:${BUILD_TAG}", 'docker/test-base')
+      imageCommon = docker.build("${MAINTAINER_NAME}/test-base:${BUILD_TAG}", 'docker/osh-test-base')
       imageCommon.push(BUILD_TAG)
 
       // Build the cache container
-      imageCache = docker.build("${MAINTAINER_NAME}/test-cache:${BUILD_TAG}", 'docker/test-cache')
+      imageCache = docker.build("${MAINTAINER_NAME}/test-cache:${BUILD_TAG}", 'docker/osh-test-cache')
       imageCache.push(BUILD_TAG)
       
       // Build the Web frontoffice container
-      imageWebFront = docker.build("${MAINTAINER_NAME}/test-web:${BUILD_TAG}", 'docker/test-web')
+      imageWebFront = docker.build("${MAINTAINER_NAME}/test-web:${BUILD_TAG}", 'docker/osh-test-web')
       imageWebFront.push(BUILD_TAG)
       
     }

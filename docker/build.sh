@@ -1,5 +1,5 @@
 #!/bin/bash
 
-./test-base/build.sh
-./test-cache/build.sh
-./test-web/build.sh
+./osh-test-base/build.sh
+./osh-test-cache/build.sh
+./osh-test-web/build.sh
