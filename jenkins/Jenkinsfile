@@ -19,10 +19,9 @@ node {
   // Github Checkout
   stage ('Checkout code') {
     // clean the working directory
-    step([$class: 'WsCleanup'])
+    //step([$class: 'WsCleanup'])
 
     // checkout the branch of the repository
-    // TODO : once dockerfile setup is good and the PR is merged on github, change repository accordingly to the environment (prod->master; preprod->preprod; qa->integ;)
     git branch: 'master', credentialsId: 'github_ssh', url: 'https://github.com/mnuaud/osh-test-app.git'
   }
 
@@ -62,8 +61,6 @@ node {
       containerWebFrontId = containerWebFront.id
       // copy front code in the image
       sh "docker cp webfiles/* ${containerWebFrontId}:/var/www/testsite"
-      // build front app
-      sh "npm install && npm build"
       // commit change to create a new web-front image
       sh "docker commit ${containerWebFrontId} ${MAINTAINER_NAME}/test-web:${BUILD_TAG}"
     }
