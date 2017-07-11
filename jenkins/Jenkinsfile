@@ -29,11 +29,11 @@ node {
   stage ('Build & Push Docker Golden Images'){
 
     // Removing old untagged images
-    try{
-      sh 'docker rmi $(docker images -q --filter "dangling=true")'
-    } catch (Exception e){
-      // Nothing
-    }
+//    try{
+//      sh 'docker rmi $(docker images -q --filter "dangling=true")'
+//    } catch (Exception e){
+//      // Nothing
+//    }
 
     docker.withRegistry(DOCKER_REGISTRY_URL, DOCKER_REGISTRY_CREDENTIALS) {
     
@@ -53,7 +53,6 @@ node {
   }
 
   // TODO check source code is correctly copied in the container at the good location
-  // TODO check commit are working with given build_tags, add another build buildtag if not
 
   stage ('Build Web FRONT image') {
     containerWebFront = imageWebFront.withRun[] {
@@ -66,10 +65,10 @@ node {
     }
   }
  
-  stage('Push Web back & front images to Registry'){
-    docker.withRegistry(DOCKER_REGISTRY_URL, DOCKER_REGISTRY_CREDENTIALS) {
-      imageWebFront.push(BUILD_TAG)
-      imageWebBack.push(BUILD_TAG)
-    }
-  }
+//  stage('Push Web back & front images to Registry'){
+//    docker.withRegistry(DOCKER_REGISTRY_URL, DOCKER_REGISTRY_CREDENTIALS) {
+//      imageWebFront.push(BUILD_TAG)
+//      imageWebBack.push(BUILD_TAG)
+//    }
+//  }
 }
