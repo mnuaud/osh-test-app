@@ -1,7 +1,8 @@
 #
 # Test Cache Dockerfile
 #
-FROM osh-test/osh-test-base:latest
+#FROM osh-test/osh-test-base:latest
+FROM ubuntu:16.04
 
 #================================================   
 LABEL version="1.0"
