@@ -77,4 +77,4 @@ EXPOSE 80 9000
 
 #================================================ 
 # Startup process
-CMD ["/docker-entrypoint.sh"]
+# CMD ["/docker-entrypoint.sh"]
