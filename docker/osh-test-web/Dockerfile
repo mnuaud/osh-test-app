@@ -54,6 +54,9 @@ COPY etc/ /etc/
 # Create ws directory
 RUN mkdir -p /var/www/testsite
 
+#================================================ 
+# Create supervisord dir
+RUN mkdir -p /usr/bin/supervisord
 
 #================================================
 # Install new relic
