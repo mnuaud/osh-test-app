@@ -1,12 +1,12 @@
 #
 # Shared container structure with common tools 
 #
-FROM alpine
+FROM ubuntu:16.04
 
 #================================================   
 LABEL version="1.0"
 LABEL build="2017-07-10"
-LABEL description="Alpine base container with common tools"
+LABEL description="ubuntu:16.04 base container with common tools"
 
 #================================================   
 # Maintainer list if you have a question
