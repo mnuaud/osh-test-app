@@ -28,10 +28,10 @@ node {
   // Docker Build golden images
   stage ('Build & Push Docker Golden Images'){    
       // Build the common container
-//        oc start-build --from-file=docker/osh-test-base
+//        oc start-build --from-file=docker/osh-test-common
   stage('Create Docker Image') {
-    dir('docker/osh-test-base') {
-      docker.build("osh-test/test-base:${BUILD_TAG}")
+    dir('docker/osh-test-common') {
+      docker.build("osh-test/test-common:${BUILD_TAG}")
     }
 }             
 //TODO        
